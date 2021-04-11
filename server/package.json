@@ -1,5 +1,5 @@
 {
-  "name": "login-app-server",
+  "name": "walnote-app-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
