@@ -47,6 +47,7 @@ const MainListRenderer = ({
           label={`New ${name}`}
           value={text}
           onChangeText={(val) => setText(val)}
+          style={{ height: 60 }}
         />
         <Button
           mode="contained"
@@ -56,7 +57,7 @@ const MainListRenderer = ({
           Add New {name}
         </Button>
       </View>
-      <View style={{ marginVertical: 20 }}>
+      <View style={{ marginBottom: 20 }}>
         <Text style={{ fontSize: 20 }}>
           Your {name}s ({items.length})
         </Text>
@@ -67,7 +68,7 @@ const MainListRenderer = ({
             renderItem={({ item }) => (
               <TouchableOpacity
                 style={styles.list}
-                onPress={() => navigation.navigate(name, { item })}
+                onPress={() => navigation.navigate(name, { list: item })}
                 onLongPress={() => handleLongPress(item)}
               >
                 <List.Item
@@ -88,10 +89,7 @@ const MainListRenderer = ({
 export default MainListRenderer;
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 20,
-    marginHorizontal: 10,
-  },
+  container: { flex: 1, padding: 20, marginHorizontal: 10 },
   list: {
     backgroundColor: "#eee",
     marginVertical: 5,

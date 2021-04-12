@@ -74,6 +74,35 @@ const TodoList = () => {
       .finally(() => setLoading(false));
   };
 
+  const saveList = (list) => {
+    setLoading(true);
+    list["userId"] = user._id;
+    fetch(`http://10.0.2.2:7781/lists/${list.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(list),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.error) {
+          setToast(data.error);
+        } else if (data.updatedList._id === list._id) {
+          setToast("List Saved!!!");
+          setLists(data.allList);
+        }
+      })
+      .catch((error) => {
+        // console.log(error)
+        setToast("Server Error");
+        setError(true);
+      })
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
     setLoading(true);
     fetch(`http://10.0.2.2:7781/lists/${user._id}`)
@@ -115,7 +144,9 @@ const TodoList = () => {
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="List" component={List} />
+        <Stack.Screen name="List">
+          {(props) => <List {...props} saveList={saveList} />}
+        </Stack.Screen>
       </Stack.Navigator>
     )
   );
