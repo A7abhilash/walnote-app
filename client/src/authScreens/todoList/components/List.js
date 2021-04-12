@@ -35,6 +35,16 @@ const List = ({ route, saveList }) => {
     setNewTodo(todo);
   };
 
+  const checkTodo = (index) => {
+    let updatedChecks = check.map((eachCheck, i) => {
+      if (i === index) {
+        return !eachCheck;
+      }
+      return eachCheck;
+    });
+    setCheck(updatedChecks);
+  };
+
   const deleteTodo = (index) => {
     setTodos(todos.filter((_, i) => i !== index));
     setCheck(check.filter((_, i) => i !== index));
@@ -120,8 +130,9 @@ const List = ({ route, saveList }) => {
                 todo={item}
                 index={index}
                 isChecked={check[index]}
-                deleteTodo={deleteTodo}
                 editTodo={editTodo}
+                deleteTodo={deleteTodo}
+                checkTodo={checkTodo}
               />
             )}
           />

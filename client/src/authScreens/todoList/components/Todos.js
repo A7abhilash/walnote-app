@@ -17,7 +17,9 @@ const Todos = ({ todo, index, isChecked, deleteTodo, editTodo, checkTodo }) => {
       </View>
       <View style={styles.actions}>
         <View style={{ flex: 4, alignItems: "flex-start" }}>
-          <Button>Mark as {!isChecked ? "Done" : "Undo"}</Button>
+          <Button onPress={() => checkTodo(index)}>
+            Mark as {!isChecked ? "Done" : "Undo"}
+          </Button>
         </View>
         <View
           style={{ flex: 4, flexDirection: "row", alignItems: "flex-start" }}
