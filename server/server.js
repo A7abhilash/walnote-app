@@ -28,6 +28,7 @@ app.get("/", auth, (req, res) => {
   return res.json(null);
 });
 app.use("/auth", require("./routes/auth"));
+app.use("/lists", require("./routes/lists"));
 
 //****PORT
 const PORT = process.env.PORT || 7781;

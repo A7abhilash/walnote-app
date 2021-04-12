@@ -1,7 +1,5 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, View } from "react-native";
 import Loading from "../containers/Loading";
 import { useAuth } from "../contexts/AuthContext";
 import TodoList from "./todoList/TodoList";
@@ -30,11 +28,3 @@ const Home = ({ navigation }) => {
 };
 
 export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    flex: 1,
-  },
-});
