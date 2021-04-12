@@ -11,7 +11,6 @@ const TodoList = () => {
   const { user } = useAuth();
   const { setToast } = useMsg();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
   const [lists, setLists] = useState(null);
 
   const addNewList = (val) => {
@@ -60,7 +59,6 @@ const TodoList = () => {
       .then((data) => {
         if (data.error) {
           setToast(data.error);
-          setError(true);
         } else {
           setLists(lists.filter((eachList) => eachList._id !== data.id));
           setToast("Deleted List Successfully!!!");
@@ -69,13 +67,12 @@ const TodoList = () => {
       .catch((error) => {
         // console.log(error);
         setToast("Server Error");
-        setError(true);
       })
       .finally(() => setLoading(false));
   };
 
   const saveList = (list) => {
-    setLoading(true);
+    // setLoading(true);
     list["userId"] = user._id;
     fetch(`http://10.0.2.2:7781/lists/${list.id}`, {
       method: "PATCH",
@@ -87,10 +84,10 @@ const TodoList = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
+        // console.log( data);
         if (data.error) {
           setToast(data.error);
-        } else if (data.updatedList._id === list._id) {
+        } else if (data.updatedList.id === list._id) {
           setToast("List Saved!!!");
           setLists(data.allList);
         }
@@ -98,7 +95,6 @@ const TodoList = () => {
       .catch((error) => {
         // console.log(error)
         setToast("Server Error");
-        setError(true);
       })
       .finally(() => setLoading(false));
   };
@@ -111,7 +107,6 @@ const TodoList = () => {
         // console.log(data);
         if (data.error) {
           setToast(data.error);
-          setError(true);
         } else {
           setLists(data);
         }
@@ -119,19 +114,16 @@ const TodoList = () => {
       .catch((err) => {
         console.log(err);
         setToast("Server Error");
-        setError(true);
       })
       .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <Loading />;
-  if (error) return <Error />;
 
   const Stack = createStackNavigator();
 
   return (
-    !loading &&
-    !error && (
+    !loading && (
       <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
         <Stack.Screen name="Todo list">
           {(props) => (

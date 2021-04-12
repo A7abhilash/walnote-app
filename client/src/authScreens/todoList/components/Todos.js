@@ -22,7 +22,9 @@ const Todos = ({ todo, index, isChecked, deleteTodo, editTodo, checkTodo }) => {
         <View
           style={{ flex: 4, flexDirection: "row", alignItems: "flex-start" }}
         >
-          <Button color="green">Edit</Button>
+          <Button color="green" onPress={() => editTodo(todo, index)}>
+            Edit
+          </Button>
           <Button color="orange" onPress={() => deleteTodo(index)}>
             Delete
           </Button>
