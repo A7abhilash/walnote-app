@@ -1,30 +1,31 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet, View } from "react-native";
-import { Button, Subheading, Title } from "react-native-paper";
 import Loading from "../containers/Loading";
 import { useAuth } from "../contexts/AuthContext";
+import TodoList from "./todoList/TodoList";
+import NoteTaking from "./noteTaking/Notetaking";
+import UserProfile from "./UserProfile";
 
 const Home = ({ navigation }) => {
-  const { user, setIsAuthenticated } = useAuth();
+  const { user } = useAuth();
 
-  const handlePress = () => {
-    AsyncStorage.removeItem("token").then(() => {
-      setIsAuthenticated(false);
-      // navigation.replace("Sign In");
-    });
-  };
+  const Tab = createBottomTabNavigator();
 
   return user === null ? (
     <Loading />
   ) : (
-    <View style={styles.container}>
-      <Title>Name: {user.name}</Title>
-      <Subheading>Email: {user.email}</Subheading>
-      <Button mode="contained" onPress={handlePress}>
-        Logout
-      </Button>
-    </View>
+    <Tab.Navigator
+      tabBarOptions={{
+        tabStyle: { paddingBottom: 15 },
+        labelStyle: { fontSize: 15 },
+      }}
+    >
+      <Tab.Screen name="Todo List" component={TodoList} />
+      <Tab.Screen name="User Profile" component={UserProfile} />
+      <Tab.Screen name="Note Taking" component={NoteTaking} />
+    </Tab.Navigator>
   );
 };
 
