@@ -1,11 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const List = ({ item }) => {
-  console.log(item);
+const List = ({ route }) => {
+  const { item } = route.params;
+
   return (
     <View style={styles.container}>
       <Text>{item.listName}</Text>
+      <Text>List</Text>
     </View>
   );
 };

@@ -17,7 +17,7 @@ export function MsgProvider({ children }) {
       ToastAndroid.LONG,
       ToastAndroid.BOTTOM,
       25,
-      50
+      150
     );
     setToast(null);
   };

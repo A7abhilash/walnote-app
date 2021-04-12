@@ -1,24 +1,84 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TextInput, Title } from "react-native-paper";
+import { Alert, Keyboard, StyleSheet, Text, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { Button, List, TextInput } from "react-native-paper";
+import { useMsg } from "../../contexts/MsgContext";
 
-const MainListRenderer = ({ lists }) => {
+const MainListRenderer = ({
+  navigation,
+  items,
+  addNew,
+  name,
+  handleDelete,
+}) => {
+  const { setAlert } = useMsg();
   const [text, setText] = useState("");
+
+  const pressHandler = () => {
+    if (text) {
+      // console.log(text);
+      addNew(text);
+      Keyboard.dismiss();
+    } else {
+      setAlert({
+        title: "Error",
+        msg: "No blank fields allowed",
+        text: "Understood",
+      });
+    }
+  };
+
+  const handleLongPress = (item) => {
+    Alert.alert("Confirm", "Are you sure to delete this?", [
+      {
+        text: "Cancel",
+      },
+      {
+        text: "Delete",
+        onPress: () => handleDelete(item),
+      },
+    ]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={{ marginBottom: 20 }}>
         <TextInput
-          label="New List"
+          label={`New ${name}`}
           value={text}
           onChangeText={(val) => setText(val)}
         />
+        <Button
+          mode="contained"
+          style={{ marginTop: 5 }}
+          onPress={pressHandler}
+        >
+          Add New {name}
+        </Button>
       </View>
       <View style={{ marginVertical: 20 }}>
-        <Text style={{ fontSize: 20 }}>Your Lists ({lists.length})</Text>
-        {lists.length ? (
-          lists.map((item) => <Text>{item.listName}</Text>)
+        <Text style={{ fontSize: 20 }}>
+          Your {name}s ({items.length})
+        </Text>
+        {items.length ? (
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item._id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.list}
+                onPress={() => navigation.navigate(name, { item })}
+                onLongPress={() => handleLongPress(item)}
+              >
+                <List.Item
+                  title={item.listName}
+                  titleStyle={{ fontSize: 18 }}
+                />
+              </TouchableOpacity>
+            )}
+          />
         ) : (
-          <Text>No lists found</Text>
+          <Text>No {name}s Found</Text>
         )}
       </View>
     </View>
@@ -31,5 +91,9 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     marginHorizontal: 10,
+  },
+  list: {
+    backgroundColor: "#eee",
+    marginVertical: 5,
   },
 });

@@ -85,13 +85,10 @@ router.patch("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     let list = await Lists.findById(req.params.id);
-    if (req.user._id !== list.userId) {
-      return res.json({ error: "Unauthorized Access" });
-    }
     await list.deleteOne();
     res.status(201).json({ id: req.params.id });
   } catch (error) {
-    res.status(400).json({ msg: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
