@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Subheading, Title } from "react-native-paper";
 import Loading from "../containers/Loading";
@@ -11,7 +11,7 @@ const Home = ({ navigation }) => {
   const handlePress = () => {
     AsyncStorage.removeItem("token").then(() => {
       setIsAuthenticated(false);
-      navigation.replace("Sign In");
+      // navigation.replace("Sign In");
     });
   };
 

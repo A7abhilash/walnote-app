@@ -10,9 +10,11 @@ import {
 } from "react-native";
 import { Button, Card, TextInput, Title } from "react-native-paper";
 import { useAuth } from "../contexts/AuthContext";
+import { useMsg } from "../contexts/MsgContext";
 
 const SignUp = ({ navigation }) => {
   const { setIsAuthenticated } = useAuth();
+  const { setToast } = useMsg();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +33,7 @@ const SignUp = ({ navigation }) => {
         .then(async (data) => {
           if (data.error) {
             console.log(data.error);
+            setToast(data.error);
           }
           if (data.msg) {
             // console.log(data);
@@ -45,7 +48,7 @@ const SignUp = ({ navigation }) => {
             setName("");
             setEmail("");
             setPassword("");
-            navigation.replace("Home");
+            // navigation.replace("Home");
           }
         })
         .catch((err) => console.log(err));
