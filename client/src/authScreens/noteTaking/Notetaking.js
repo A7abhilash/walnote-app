@@ -70,7 +70,6 @@ const NoteTaking = () => {
   };
 
   const saveNote = (note) => {
-    setLoading(true);
     note["userId"] = user._id;
     fetch(`http://10.0.2.2:7781/notes/${note.id}`, {
       method: "PATCH",
@@ -85,13 +84,13 @@ const NoteTaking = () => {
         // console.log(data);
         if (data.error) {
           setToast(data.error);
-        } else if (data.updatedNote.id === list._id) {
-          setToast("List Saved!!!");
-          setLists(data.allNotes);
+        } else if (data.updatedNote.id === note._id) {
+          setToast("Note Saved!!!");
+          setNotes(data.allNotes);
         }
       })
       .catch((error) => {
-        // console.log(error)
+        // console.log(error);
         setToast("Server Error");
       })
       .finally(() => setLoading(false));
