@@ -72,7 +72,7 @@ const MainListRenderer = ({
                 onLongPress={() => handleLongPress(item)}
               >
                 <List.Item
-                  title={item.listName}
+                  title={item.listName || item.noteName}
                   titleStyle={{ fontSize: 18 }}
                 />
               </TouchableOpacity>

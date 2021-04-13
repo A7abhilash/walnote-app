@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../../containers/Loading";
-import Error from "../../containers/Error";
 import { useAuth } from "../../contexts/AuthContext";
 import MainListRenderer from "../containers/MainListRenderer";
 import { useMsg } from "./../../contexts/MsgContext";
