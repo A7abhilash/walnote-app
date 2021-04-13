@@ -10,6 +10,7 @@ const Todos = ({ todo, index, isChecked, deleteTodo, editTodo, checkTodo }) => {
           style={{
             fontSize: 20,
             textDecorationLine: isChecked ? "line-through" : "none",
+            fontStyle: isChecked ? "italic" : "normal",
           }}
         >
           {todo}

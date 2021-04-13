@@ -9,15 +9,6 @@ const List = ({ route, saveList }) => {
   const [listName, setListName] = useState(list?.listName);
   const [todos, setTodos] = useState(list?.todos);
   const [check, setCheck] = useState(list?.check);
-  //   const [todos, setTodos] = useState([
-  //     "djks",
-  //     "dkjasdhkjais",
-  //     "fdhjf",
-  //     "dkjshf",
-  //     "dkjsfkjd",
-  //     "dkjsbkj",
-  //   ]);
-  //   const [check, setCheck] = useState([false, true, true, false, true, false]);
 
   const addNewTodo = () => {
     if (newTodo) {
@@ -88,7 +79,7 @@ const List = ({ route, saveList }) => {
           }}
           onPress={handleSave}
         >
-          Save list
+          Save
         </Button>
       </View>
       <View style={{ marginBottom: 20 }}>
@@ -151,7 +142,7 @@ export default List;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 10,
     marginHorizontal: 10,
   },
 });

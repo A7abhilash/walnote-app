@@ -89,7 +89,7 @@ const MainListRenderer = ({
 export default MainListRenderer;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, marginHorizontal: 10 },
+  container: { flex: 1, padding: 10, marginHorizontal: 10 },
   list: {
     backgroundColor: "#eee",
     marginVertical: 5,
