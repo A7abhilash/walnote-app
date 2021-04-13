@@ -44,6 +44,59 @@ const NoteTaking = () => {
       .finally(() => setLoading(false));
   };
 
+  const deleteNote = (note) => {
+    setLoading(true);
+    fetch(`http://10.0.2.2:7781/notes/${note._id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.error) {
+          setToast(data.error);
+        } else {
+          setNotes(notes.filter((eachNote) => eachNote._id !== data.id));
+        }
+      })
+      .catch((error) => {
+        // console.log(error)
+        setToast("Server Error");
+      })
+      .finally(() => setLoading(false));
+  };
+
+  const saveNote = (note) => {
+    setLoading(true);
+    note["userId"] = user._id;
+    fetch(`http://10.0.2.2:7781/notes/${note.id}`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(note),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.error) {
+          setToast(data.error);
+        } else if (data.updatedNote.id === list._id) {
+          setToast("List Saved!!!");
+          setLists(data.allNotes);
+        }
+      })
+      .catch((error) => {
+        // console.log(error)
+        setToast("Server Error");
+      })
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
     setLoading(true);
     fetch(`http://10.0.2.2:7781/notes/${user._id}`)
@@ -76,18 +129,13 @@ const NoteTaking = () => {
               {...props}
               items={notes}
               addNew={addNewNote}
-              // handleDelete={deleteList}
+              handleDelete={deleteNote}
               name="Note"
             />
           )}
         </Stack.Screen>
-        <Stack.Screen name="Notes">
-          {(props) => (
-            <Notes
-              {...props}
-              //  saveList={saveList}
-            />
-          )}
+        <Stack.Screen name="Note">
+          {(props) => <Notes {...props} saveNote={saveNote} />}
         </Stack.Screen>
       </Stack.Navigator>
     )

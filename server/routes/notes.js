@@ -30,7 +30,6 @@ router.post("/", async (req, res) => {
     note: req.body.note,
     userId: req.body.userId,
   };
-  console.log("New Note:", note);
   try {
     let encryptedData = CryptoJS.AES.encrypt(
       JSON.stringify(note),
