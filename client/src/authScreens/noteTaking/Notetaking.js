@@ -16,7 +16,7 @@ const NoteTaking = () => {
     setLoading(true);
     let note = {
       noteName: val,
-      note: "<h2>Start writing your notes...</h2>",
+      note: "<p>Start writing your notes...</p>",
       userId: user._id,
     };
     // console.log(list);
