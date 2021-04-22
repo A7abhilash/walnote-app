@@ -14,7 +14,7 @@
 
 ### Screenshots
 
-<div>
+<div align="center">
 <h6>
 #1 Login Screen(!Auth) | #2 TodoList Screen | #3 List Screen | #4 Notes Screen | #5 Note Screen | #6 User Screen  
 </h6>
