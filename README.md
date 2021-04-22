@@ -21,12 +21,12 @@
 </div>
 
 <div align="center">
-<img src="client/assets/screenshots/Screenshot_1619061852.png" style="border-radius:5px;" alt="Login" height="200">
-<img src="client/assets/screenshots/Screenshot_1619061870.png" style="border-radius:5px;" alt="TodoList" height="200">
-<img src="client/assets/screenshots/Screenshot_1619061885.png" style="border-radius:5px;" alt="List" height="200">
-<img src="client/assets/screenshots/Screenshot_1619061875.png" style="border-radius:5px;" alt="Notes" height="200">
-<img src="client/assets/screenshots/Screenshot_1619061896.png" style="border-radius:5px;" alt="Note" height="200">
-<img src="client/assets/screenshots/Screenshot_1619061877.png" style="border-radius:5px;" alt="User" height="200">
+<img src="client/assets/screenshots/Screenshot_1619061852.png" style="border-radius:5px;" alt="Login" height="400">
+<img src="client/assets/screenshots/Screenshot_1619061870.png" style="border-radius:5px;" alt="TodoList" height="400">
+<img src="client/assets/screenshots/Screenshot_1619061885.png" style="border-radius:5px;" alt="List" height="400">
+<img src="client/assets/screenshots/Screenshot_1619061875.png" style="border-radius:5px;" alt="Notes" height="400">
+<img src="client/assets/screenshots/Screenshot_1619061896.png" style="border-radius:5px;" alt="Note" height="400">
+<img src="client/assets/screenshots/Screenshot_1619061877.png" style="border-radius:5px;" alt="User" height="400">
 </div>
 
 > > [Web Application(Repo)](https://github.com/A7abhilash/walnote)
