@@ -1,11 +1,19 @@
 import React, { useRef, useState } from "react";
-import { Keyboard, ScrollView, StyleSheet, Text, View } from "react-native";
-import { Button, TextInput, Title } from "react-native-paper";
+import {
+  Keyboard,
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Image,
+} from "react-native";
+import { TextInput, Title } from "react-native-paper";
 import {
   RichEditor,
   RichToolbar,
   actions,
 } from "react-native-pell-rich-editor";
+import icons from "../../../icons";
 
 const Notes = ({ route, saveNote }) => {
   const { list } = route.params;
@@ -29,7 +37,7 @@ const Notes = ({ route, saveNote }) => {
         style={{
           marginBottom: 20,
           flexDirection: "row",
-          alignItems: "stretch",
+          alignItems: "center",
         }}
       >
         <TextInput
@@ -39,18 +47,12 @@ const Notes = ({ route, saveNote }) => {
           onChangeText={(val) => setNoteName(val)}
           style={{ height: 50, flex: 9 }}
         />
-        <Button
-          mode="contained"
-          style={{
-            marginTop: 5,
-            flex: 1,
-            marginLeft: 5,
-            justifyContent: "center",
-          }}
-          onPress={handleSave}
-        >
-          Save
-        </Button>
+        <TouchableOpacity style={{ marginLeft: 15 }} onPress={handleSave}>
+          <Image
+            source={icons.save}
+            style={{ width: 30, height: 30, tintColor: "green", opacity: 0.5 }}
+          />
+        </TouchableOpacity>
       </View>
       <View style={{ flex: 0.86 }}>
         <Title>Your Note</Title>

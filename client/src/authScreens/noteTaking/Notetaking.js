@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Notes from "./components/Notes";
 
 const NoteTaking = () => {
-  const { user } = useAuth();
+  const { user, authToken } = useAuth();
   const { setToast } = useMsg();
   const [loading, setLoading] = useState(true);
   const [notes, setNotes] = useState(null);
@@ -22,10 +22,11 @@ const NoteTaking = () => {
     // console.log(list);
     fetch(`http://10.0.2.2:7781/notes`, {
       method: "POST",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
       body: JSON.stringify(note),
     })
       .then((res) => res.json())
@@ -48,10 +49,11 @@ const NoteTaking = () => {
     setLoading(true);
     fetch(`http://10.0.2.2:7781/notes/${note._id}`, {
       method: "DELETE",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -73,10 +75,11 @@ const NoteTaking = () => {
     note["userId"] = user._id;
     fetch(`http://10.0.2.2:7781/notes/${note.id}`, {
       method: "PATCH",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
       body: JSON.stringify(note),
     })
       .then((res) => res.json())
@@ -98,7 +101,13 @@ const NoteTaking = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://10.0.2.2:7781/notes/${user._id}`)
+    fetch(`http://10.0.2.2:7781/notes/${user._id}`, {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

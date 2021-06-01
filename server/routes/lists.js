@@ -2,13 +2,15 @@ const express = require("express");
 const router = express.Router();
 var CryptoJS = require("crypto-js");
 const Lists = require("../models/Lists");
+const auth = require("../middleware/auth");
 
 //@route   GET /lists/:id
-//@desc     Get all the LISTS of userId :id
-router.get("/:id", async (req, res) => {
+//@desc     Get all the LISTS of userId
+router.get("/", auth, async (req, res) => {
   try {
+    // console.log(req.user);
     const allData = [];
-    const allList = await Lists.find({ userId: req.params.id });
+    const allList = await Lists.find({ userId: req.user._id });
     allList.forEach((list) => {
       const decryptedData = CryptoJS.AES.decrypt(list.data, "Secret key 123");
       const data = JSON.parse(decryptedData.toString(CryptoJS.enc.Utf8));
@@ -23,13 +25,17 @@ router.get("/:id", async (req, res) => {
 
 //@route    POST /lists
 //@desc     Add new LIST
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   let list = {
     listName: req.body.listName,
     todos: req.body.todos,
     check: req.body.check,
     userId: req.body.userId,
   };
+  // console.log(list);
+  if (list.userId.toString() !== req.user._id.toString()) {
+    return res.status(400).json({ error: "Unauthorized access" });
+  }
   try {
     let encryptedData = CryptoJS.AES.encrypt(
       JSON.stringify(list),
@@ -40,15 +46,19 @@ router.post("/", async (req, res) => {
     list["_id"] = response._id;
     res.status(201).json(list);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 });
 
 //@route    PATCH /lists/:id
 //@desc     Edit LIST
-router.patch("/:id", async (req, res) => {
+router.patch("/:id", auth, async (req, res) => {
   try {
     const list = await Lists.findByIdAndUpdate(req.params.id);
+    if (list.userId.toString() !== req.user._id.toString()) {
+      return res.status(400).json({ error: "Unauthorized access" });
+    }
     const decryptedData = CryptoJS.AES.decrypt(list.data, "Secret key 123");
     const data = JSON.parse(decryptedData.toString(CryptoJS.enc.Utf8));
 
@@ -82,9 +92,12 @@ router.patch("/:id", async (req, res) => {
 
 //@route     DELETE /lists/:id
 //@desc     Delete a LIST
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
     let list = await Lists.findById(req.params.id);
+    if (list.userId.toString() !== req.user._id.toString()) {
+      return res.status(400).json({ error: "Unauthorized access" });
+    }
     await list.deleteOne();
     res.status(201).json({ id: req.params.id });
   } catch (error) {

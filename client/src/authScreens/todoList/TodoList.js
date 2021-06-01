@@ -7,7 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import List from "./components/List";
 
 const TodoList = () => {
-  const { user } = useAuth();
+  const { user, authToken } = useAuth();
   const { setToast } = useMsg();
   const [loading, setLoading] = useState(true);
   const [lists, setLists] = useState(null);
@@ -23,10 +23,11 @@ const TodoList = () => {
     // console.log(list);
     fetch(`http://10.0.2.2:7781/lists`, {
       method: "POST",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
       body: JSON.stringify(list),
     })
       .then((res) => res.json())
@@ -34,9 +35,10 @@ const TodoList = () => {
         // console.log(data);
         if (data.error) {
           setToast(data.error);
+        } else {
+          setLists([...lists, data]);
+          setToast("Added New List Successfully!!!");
         }
-        setLists([...lists, data]);
-        setToast("Added New List Successfully!!!");
       })
       .catch((err) => {
         // console.log(error)
@@ -49,10 +51,11 @@ const TodoList = () => {
     setLoading(true);
     fetch(`http://10.0.2.2:7781/lists/${list._id}`, {
       method: "DELETE",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -75,10 +78,11 @@ const TodoList = () => {
     list["userId"] = user._id;
     fetch(`http://10.0.2.2:7781/lists/${list.id}`, {
       method: "PATCH",
-      headers: {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
         Accept: "application/json",
         "Content-Type": "application/json",
-      },
+      }),
       body: JSON.stringify(list),
     })
       .then((res) => res.json())
@@ -100,10 +104,13 @@ const TodoList = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://10.0.2.2:7781/lists/${user._id}`)
+    fetch(`http://10.0.2.2:7781/lists/`, {
+      headers: new Headers({
+        Authorization: `Bearer ${authToken}`,
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
-        // console.log(data);
         if (data.error) {
           setToast(data.error);
         } else {

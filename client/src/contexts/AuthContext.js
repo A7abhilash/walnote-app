@@ -10,12 +10,14 @@ export const useAuth = () => {
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [authToken, setAuthToken] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const fetchUserData = async () => {
     if (isAuthenticated) {
       const token = await AsyncStorage.getItem("token");
+      setAuthToken(token);
       const res = await fetch("http://10.0.2.2:7781/", {
         headers: new Headers({
           Authorization: `Bearer ${token}`,
@@ -50,7 +52,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, setIsAuthenticated, isAuthenticated }}
+      value={{ user, loading, setIsAuthenticated, isAuthenticated, authToken }}
     >
       {children}
     </AuthContext.Provider>
