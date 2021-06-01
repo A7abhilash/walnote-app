@@ -16,17 +16,18 @@
 
 <div align="center">
 <h6>
-#1 Login Screen(!Auth) | #2 TodoList Screen | #3 List Screen | #4 Notes Screen | #5 Note Screen | #6 User Screen  
+#1 Sign In Screen | #2 Sign Up Screen | #3 TodoList Screen | #4 List Screen | #5 Notes Screen | #6 Note Screen | #7 User Screen  
 </h6>
 </div>
 
 <div align="center">
-<img src="client/assets/screenshots/Screenshot_1619061852.png" style="border-radius:5px;" alt="Login" height="400">
-<img src="client/assets/screenshots/Screenshot_1619061870.png" style="border-radius:5px;" alt="TodoList" height="400">
-<img src="client/assets/screenshots/Screenshot_1619061885.png" style="border-radius:5px;" alt="List" height="400">
-<img src="client/assets/screenshots/Screenshot_1619061875.png" style="border-radius:5px;" alt="Notes" height="400">
-<img src="client/assets/screenshots/Screenshot_1619061896.png" style="border-radius:5px;" alt="Note" height="400">
-<img src="client/assets/screenshots/Screenshot_1619061877.png" style="border-radius:5px;" alt="User" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564187.png" style="border-radius:5px;" alt="Sign In" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564185.png" style="border-radius:5px;" alt="Sign Up" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564031.png" style="border-radius:5px;" alt="TodoList" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564054.png" style="border-radius:5px;" alt="List" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564045.png" style="border-radius:5px;" alt="Notes" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564075.png" style="border-radius:5px;" alt="Note" height="400">
+<img src="client/assets/screenshots/Screenshot_1622564043.png" style="border-radius:5px;" alt="User" height="400">
 </div>
 
 > > [Web Application(Repo)](https://github.com/A7abhilash/walnote)
