@@ -121,14 +121,8 @@ const NoteTaking = () => {
 
   return (
     !loading && (
-      <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
-        <Stack.Screen
-          name="Note Taking"
-          options={{
-            headerStyle: { backgroundColor: "darkblue" },
-            headerTitleStyle: { color: "white" },
-          }}
-        >
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Note Taking">
           {(props) => (
             <MainListRenderer
               {...props}

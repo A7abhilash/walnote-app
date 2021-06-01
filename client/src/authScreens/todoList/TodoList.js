@@ -123,14 +123,8 @@ const TodoList = () => {
 
   return (
     !loading && (
-      <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
-        <Stack.Screen
-          name="Todo list"
-          options={{
-            headerStyle: { backgroundColor: "darkblue" },
-            headerTitleStyle: { color: "white" },
-          }}
-        >
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="Todo list">
           {(props) => (
             <MainListRenderer
               {...props}
