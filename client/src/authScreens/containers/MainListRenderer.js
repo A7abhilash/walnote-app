@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Alert, Keyboard, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Keyboard, StyleSheet, Text, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { Button, List, TextInput } from "react-native-paper";
 import { useMsg } from "../../contexts/MsgContext";
+import icons from "../../icons/";
 
 const MainListRenderer = ({
   navigation,
@@ -42,20 +43,30 @@ const MainListRenderer = ({
 
   return (
     <View style={styles.container}>
-      <View style={{ marginBottom: 20 }}>
+      <View
+        style={{
+          marginBottom: 20,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
         <TextInput
           label={`New ${name}`}
           value={text}
           onChangeText={(val) => setText(val)}
-          style={{ height: 60 }}
+          style={{ height: 50, width: "85%" }}
+          mode="outlined"
         />
-        <Button
+        <TouchableOpacity
           mode="contained"
-          style={{ marginTop: 5 }}
+          style={{ marginLeft: 15 }}
           onPress={pressHandler}
         >
-          Add New {name}
-        </Button>
+          <Image
+            source={icons.add}
+            style={{ width: 45, height: 45, tintColor: "darkblue" }}
+          />
+        </TouchableOpacity>
       </View>
       <View style={{ marginBottom: 20 }}>
         <Text style={{ fontSize: 20 }}>
