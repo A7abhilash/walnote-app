@@ -1,36 +1,64 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Button } from "react-native-paper";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import icons from "../../../icons";
 
 const Todos = ({ todo, index, isChecked, deleteTodo, editTodo, checkTodo }) => {
   return (
     <View style={styles.todoContainer}>
-      <View style={{ flex: 7 }}>
-        <Text
-          style={{
-            fontSize: 20,
-            textDecorationLine: isChecked ? "line-through" : "none",
-            fontStyle: isChecked ? "italic" : "normal",
-          }}
-        >
-          {todo}
-        </Text>
-      </View>
-      <View style={styles.actions}>
-        <View style={{ flex: 4, alignItems: "flex-start" }}>
-          <Button onPress={() => checkTodo(index)}>
-            Mark as {!isChecked ? "Done" : "Undo"}
-          </Button>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <View>
+          <TouchableOpacity
+            onPress={() => checkTodo(index)}
+            style={{ flexDirection: "row", alignItems: "center" }}
+          >
+            <Image
+              source={isChecked ? icons.checked : icons.unchecked}
+              style={{
+                width: 20,
+                height: 20,
+                marginRight: 10,
+                tintColor: isChecked ? "green" : "black",
+              }}
+            />
+            <Text
+              style={{
+                fontSize: 20,
+                textDecorationLine: isChecked ? "line-through" : "none",
+                fontStyle: isChecked ? "italic" : "normal",
+                width: "75%",
+              }}
+            >
+              {todo}
+            </Text>
+          </TouchableOpacity>
         </View>
-        <View
-          style={{ flex: 4, flexDirection: "row", alignItems: "flex-start" }}
-        >
-          <Button color="green" onPress={() => editTodo(todo, index)}>
-            Edit
-          </Button>
-          <Button color="orange" onPress={() => deleteTodo(index)}>
-            Delete
-          </Button>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <TouchableOpacity color="green" onPress={() => editTodo(todo, index)}>
+            <Image
+              source={icons.edit}
+              style={{
+                width: 20,
+                height: 20,
+                tintColor: "orange",
+                marginRight: 10,
+              }}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity color="orange" onPress={() => deleteTodo(index)}>
+            <Image
+              source={icons.delete}
+              style={{
+                width: 20,
+                height: 20,
+                tintColor: "darkred",
+              }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -41,13 +69,10 @@ export default Todos;
 
 const styles = StyleSheet.create({
   todoContainer: {
-    backgroundColor: "#eee",
-    marginVertical: 10,
-    padding: 10,
-  },
-  actions: {
-    marginTop: 10,
-    flexDirection: "row",
-    alignItems: "center",
+    paddingHorizontal: 5,
+    paddingVertical: 10,
+    borderBottomColor: "#333",
+    borderBottomWidth: 1,
+    marginBottom: 5,
   },
 });

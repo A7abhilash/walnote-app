@@ -24,13 +24,10 @@ const AppNavigator = () => {
             <>
               <Stack.Screen name="Sign In" component={SignIn} />
               <Stack.Screen name="Sign Up" component={SignUp} />
-              {/* <Stack.Screen name="Home" component={Home} /> */}
             </>
           ) : (
             <>
               <Stack.Screen name="Home" component={Home} />
-              {/* <Stack.Screen name="Sign In" component={SignIn} />
-              <Stack.Screen name="Sign Up" component={SignUp} /> */}
             </>
           )}
         </Stack.Navigator>
