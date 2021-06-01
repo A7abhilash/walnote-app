@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { Keyboard, StyleSheet, Text, View, FlatList } from "react-native";
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { Button, TextInput } from "react-native-paper";
+import icons from "../../../icons";
 import Todos from "./Todos";
 
 const List = ({ route, saveList }) => {
@@ -22,7 +31,7 @@ const List = ({ route, saveList }) => {
 
   const editTodo = (todo, index) => {
     setTodos(todos.filter((editingTodo) => editingTodo !== todo));
-    setCheck(check.filter((eachCheck, i) => i !== index));
+    setCheck(check.filter((_, i) => i !== index));
     setNewTodo(todo);
   };
 
@@ -59,7 +68,7 @@ const List = ({ route, saveList }) => {
         style={{
           marginBottom: 20,
           flexDirection: "row",
-          alignItems: "stretch",
+          alignItems: "center",
         }}
       >
         <TextInput
@@ -69,18 +78,12 @@ const List = ({ route, saveList }) => {
           onChangeText={(val) => setListName(val)}
           style={{ height: 50, flex: 9 }}
         />
-        <Button
-          mode="contained"
-          style={{
-            marginTop: 5,
-            flex: 1,
-            marginLeft: 5,
-            justifyContent: "center",
-          }}
-          onPress={handleSave}
-        >
-          Save
-        </Button>
+        <TouchableOpacity style={{ marginLeft: 15 }} onPress={handleSave}>
+          <Image
+            source={icons.save}
+            style={{ width: 30, height: 30, tintColor: "green", opacity: 0.5 }}
+          />
+        </TouchableOpacity>
       </View>
       <View style={{ marginBottom: 20 }}>
         <Text style={{ fontSize: 20 }}>Your todos ({todos.length})</Text>
@@ -88,7 +91,7 @@ const List = ({ route, saveList }) => {
           style={{
             marginBottom: 20,
             flexDirection: "row",
-            alignItems: "stretch",
+            alignItems: "center",
           }}
         >
           <TextInput
@@ -98,19 +101,17 @@ const List = ({ route, saveList }) => {
             onChangeText={(val) => setNewTodo(val)}
             style={{ height: 50, flex: 9 }}
           />
-          <Button
-            mode="contained"
-            style={{
-              marginTop: 5,
-              flex: 1,
-              marginLeft: 5,
-              justifyContent: "center",
-            }}
-            color="#333"
-            onPress={addNewTodo}
-          >
-            Add
-          </Button>
+          <TouchableOpacity style={{ marginLeft: 15 }} onPress={addNewTodo}>
+            <Image
+              source={icons.add}
+              style={{
+                width: 45,
+                height: 45,
+                tintColor: "darkblue",
+                opacity: 0.5,
+              }}
+            />
+          </TouchableOpacity>
         </View>
         {todos.length ? (
           <FlatList

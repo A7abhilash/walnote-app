@@ -57,14 +57,10 @@ const MainListRenderer = ({
           style={{ height: 50, width: "85%" }}
           mode="outlined"
         />
-        <TouchableOpacity
-          mode="contained"
-          style={{ marginLeft: 15 }}
-          onPress={pressHandler}
-        >
+        <TouchableOpacity style={{ marginLeft: 15 }} onPress={pressHandler}>
           <Image
             source={icons.add}
-            style={{ width: 45, height: 45, tintColor: "darkblue" }}
+            style={{ width: 50, height: 50, tintColor: "darkblue" }}
           />
         </TouchableOpacity>
       </View>
