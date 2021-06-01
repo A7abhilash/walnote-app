@@ -106,6 +106,8 @@ const styles = StyleSheet.create({
   },
   card: {
     paddingVertical: 20,
+    elevation: 5,
+    borderRadius: 30,
   },
   title: {
     color: "blue",
