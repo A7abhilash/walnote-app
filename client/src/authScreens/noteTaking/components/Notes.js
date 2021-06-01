@@ -52,38 +52,38 @@ const Notes = ({ route, saveNote }) => {
           Save
         </Button>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 0.86 }}>
         <Title>Your Note</Title>
         <ScrollView>
           <RichEditor
             ref={richText}
             initialContentHTML={note}
             onChange={setNote}
-            style={{ flex: 1 }}
+            style={{ flex: 1, marginBottom: 5 }}
             scrollEnabled={true}
           />
+          <RichToolbar
+            style={{ backgroundColor: "#fff" }}
+            selectedIconTint={{ color: "#333" }}
+            selectedButtonStyle={{
+              borderColor: "#333",
+              borderStyle: "solid",
+              borderBottomWidth: 1,
+            }}
+            editor={richText}
+            actions={[
+              actions.setBold,
+              actions.setItalic,
+              actions.insertBulletsList,
+              actions.insertOrderedList,
+              actions.setStrikethrough,
+              actions.setUnderline,
+              actions.checkboxList,
+              actions.undo,
+              actions.redo,
+            ]}
+          />
         </ScrollView>
-        <RichToolbar
-          style={{ backgroundColor: "#fff" }}
-          selectedIconTint={{ color: "#333" }}
-          selectedButtonStyle={{
-            borderColor: "#333",
-            borderStyle: "solid",
-            borderBottomWidth: 1,
-          }}
-          editor={richText}
-          actions={[
-            actions.setBold,
-            actions.setItalic,
-            actions.insertBulletsList,
-            actions.insertOrderedList,
-            actions.setStrikethrough,
-            actions.setUnderline,
-            actions.checkboxList,
-            actions.undo,
-            actions.redo,
-          ]}
-        />
       </View>
     </View>
   );

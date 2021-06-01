@@ -93,5 +93,8 @@ const styles = StyleSheet.create({
   list: {
     backgroundColor: "#eee",
     marginVertical: 5,
+    borderRadius: 10,
+    elevation: 1,
+    marginHorizontal: 5,
   },
 });

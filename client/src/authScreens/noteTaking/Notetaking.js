@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../containers/Loading";
 import { useAuth } from "../../contexts/AuthContext";
 import MainListRenderer from "../containers/MainListRenderer";
-import { useMsg } from "./../../contexts/MsgContext";
+import { useMsg } from "../../contexts/MsgContext";
 import { createStackNavigator } from "@react-navigation/stack";
 import Notes from "./components/Notes";
 
